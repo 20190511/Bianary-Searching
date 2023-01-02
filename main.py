@@ -19,10 +19,12 @@ target : 떡볶이 길이를 이진탐색으로 잡는다!
 20 17 5 9 16 17 20 21 26 30
 """
 
-target = 1
+
+
 n, m = map(int, input().split())
 dduk = list(map(int, input().split()))
-
+"""
+target = 1
 count = 0
 while True:
   count += 1
@@ -36,3 +38,22 @@ while True:
     target -= 1
   else:
     target *= 2
+"""
+
+start = 0 #떡 시작길이
+end = max(dduk) #떡 최대길이
+
+result = 0
+while start<=end:
+  total = 0
+  mid = (start+end)//2
+  for x in dduk:
+    if x > mid:
+      total += x - mid
+
+  if total < m:
+    end = mid-1
+  else:
+    result = mid
+    start = mid+1
+    
