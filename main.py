@@ -32,13 +32,13 @@ strs = list(map(int, input().split()))
 
 def first (strs, target, start, end):
   if start>end:
-    return
+    return -1
   mid = (start+end)//2
-  if (mid==0 or strs[mid-1]<strs[target]) and strs[mid]==strs[target]:
+  if (mid==0 or strs[mid-1]<target) and strs[mid]==target:
     return mid
-  elif strs[mid] >= strs[target]:
+  elif strs[mid] >= target:
     return first(strs,target,start,mid-1)
-  elif strs[mid] < strs[target]:
+  elif strs[mid] < target:
     return first(strs,target,mid+1,end)
   """
   else:
@@ -47,13 +47,13 @@ def first (strs, target, start, end):
 
 def final (strs,target,start,end):
   if start>end:
-    return
+    return -1
   mid = (start+end)//2
-  if (mid==end or strs[mid+1]>strs[target]) and strs[mid]==strs[target]:
+  if (mid==end or strs[mid+1]>target) and strs[mid]==target:
     return mid
-  elif strs[mid] > strs[target]:
+  elif strs[mid] > target:
     return final(strs, target, start, mid-1)
-  elif strs[mid] <= strs[target]:
+  elif strs[mid] <= target:
     return final(strs, target, mid+1, end)
   """
   else:
@@ -68,3 +68,17 @@ else:
   print(big-small+1)
 
     
+
+
+from bisect import bisect_left, bisect_right
+
+def countBisect(strs, left_value, right_value):
+  left_idx = bisect_left(strs,left_value)
+  right_idx = bisect_right(strs,right_value)
+  return right_idx - left_idx
+
+count = countBisect(strs, x,x)
+if count == 0:
+  print(-1)
+else:
+  print(count)
